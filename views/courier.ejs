@@ -16,25 +16,24 @@
   <script src="/js/app.js"></script>
 </head>
 <body id="courier">
-  <div id="page-wrapper" class="container">
+  <div id="page-wrapper" class="container col-xs-6 col-xs-offset-3">
     <header class="page-header text-center">
       <h1>Courier</h1>
         <div>
           <h2>queue</h2>
-          <img src="http://placehold.it/350x150">
-          <ul class="jobs list-group">
-            <% jobs.forEach(function(job) { %>
-            <li class="job list-group-item"><%= job.name %> at <%= job.url %> <span data-id="<%= job._id %>" class="close delete">X</span></li>
-            <% }); %>
-          </ul>
+
         </div>
         <div>
           <h2>my jobs</h2>
           <img src="http://placehold.it/350x150">
+          <ul class="myjobs">
+          </ul>
         </div> 
         <div>
           <h2>completed jobs</h2>
           <img src="http://placehold.it/350x150">
+          <ul class='mycompletedjobs'>
+          </ul>
         </div> 
       </header>  
   </div>

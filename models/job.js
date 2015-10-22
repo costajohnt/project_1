@@ -15,10 +15,7 @@ var jobSchema = mongoose.Schema({
 		type: Number, 
 		required: true
 	},
-	order_time: {
-		type: Date, 
-		required: true
-	},
+	
 	order_contents: [{
 		type: String,
 		 required: true
@@ -34,7 +31,12 @@ var jobSchema = mongoose.Schema({
 	},
 	riders: [{
 		type: Schema.Types.ObjectId, 
-		ref: 'Rider'}]
+		ref: 'Rider'
+	}],
+	date: { 
+		type: Date, 
+		default: Date.now 
+	}
 });
 
 var Job = mongoose.model('Job', jobSchema);

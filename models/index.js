@@ -6,3 +6,6 @@ mongoose.connect( process.env.MONGOLAB_URI ||
 
 // After creating a new model, require and export it:
 // module.exports.Tweet = require("./tweet.js");
+
+module.exports.Job = require('./job.js');
+module.exports.Rider = require('./rider.js');

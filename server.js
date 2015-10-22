@@ -12,10 +12,39 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
+var jobs = [{ name: 'Johnny Cakes', address: '1850 Fulton St. #9', phone_number: 2012139855, order_time: '11:07PM', delivery_contents: 'large pepperoni pizza', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: true},
+			{ name: 'John Donson', address: '1200 Fulton St. #9', phone_number: 4158605098, order_time: '11:07PM', delivery_contents: 'cheese steak', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: false},
+			{ name: 'James Cakes', address: '1850 Atalays St.', phone_number: 2012139855, order_time: '1:30PM', delivery_contents: 'tacos', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: true}];
+
+app.get('/jobs', function (req, res) {
+	res.json(jobs);
+});
 
 app.get('/', function(req, res) {
-  res.render("index");
+  res.render("splash");
 });
+
+app.get('/dispatch', function(req, res) {
+  res.render("dispatch");
+});
+
+app.get('/courier', function(req, res) {
+  res.render("courier", {jobs: jobs});
+});
+
+// app.post('/api/courier', function (req, res) {
+// 	console.log(req.body);
+// 	db.Job.create(req.body, function (err, job) {
+// 		if (err) {
+// 			console.log(err);
+// 		}
+// 		res.json(job);
+// 	});
+// });
+
+// app.get('/', function(req, res) {
+//   res.send("Hellow World!");
+// });
 
 // app.listen(3000, function() {
 //   console.log("express-heroku-starter is running on port 3000");

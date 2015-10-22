@@ -1,3 +1,12 @@
-#page-wrapper {
-	background-color: lightblue;
+#splash {
+	background-image: url('http://i.imgur.com/tLKwvQF.jpg?1');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 100%;
 }
+
+#dispatch, #courier {
+	color: white;
+	background: black;
+}	

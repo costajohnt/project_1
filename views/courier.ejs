@@ -15,25 +15,28 @@
   <link rel="stylesheet" type="text/css" href="/css/main.css">
   <script src="/js/app.js"></script>
 </head>
-<body>
-
+<body id="courier">
   <div id="page-wrapper" class="container">
-    <header class="page-header">
-      <h1>This is the Title</h1>
-    </header>
-    
-    <!-- This is the bs3-form boilerplate: -->
-    <form action="" method="POST" role="form">
-      <legend>Form title</legend>
-    
-      <div class="form-group">
-        <label for="">label</label>
-        <input type="text" class="form-control" id="" placeholder="Input field">
-      </div>
-    
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
+    <header class="page-header text-center">
+      <h1>Courier</h1>
+        <div>
+          <h2>queue</h2>
+          <img src="http://placehold.it/350x150">
+          <ul class="jobs list-group">
+            <% jobs.forEach(function(job) { %>
+            <li class="job list-group-item"><%= job.name %> at <%= job.url %> <span data-id="<%= job._id %>" class="close delete">X</span></li>
+            <% }); %>
+          </ul>
+        </div>
+        <div>
+          <h2>my jobs</h2>
+          <img src="http://placehold.it/350x150">
+        </div> 
+        <div>
+          <h2>completed jobs</h2>
+          <img src="http://placehold.it/350x150">
+        </div> 
+      </header>  
   </div>
 </body>
 </html>

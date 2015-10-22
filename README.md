@@ -115,3 +115,9 @@ This command lists your most recent application server logs. Helpful for figurin
 
 #### `heroku run bash`
 This command allows you to run terminal _on Heroku's servers_. This is a handy way for us to poke around and run commands on our application (like seeding the database, and checking that everything was installed correctly).
+
+          <ul class="jobs list-group">
+            <% jobs.forEach(function(job) { %>
+            <li class="job list-group-item"><%= job.name %> at <%= job.url %> <span data-id="<%= job._id %>" class="close delete">X</span></li>
+            <% }); %>
+          </ul>

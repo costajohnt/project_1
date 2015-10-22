@@ -1,5 +1,8 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/my_heroku_app");
+
+mongoose.connect( process.env.MONGOLAB_URI ||
+                  process.env.MONGOHQ_URL || 
+                  "mongodb://localhost/project_1" );
 
 // After creating a new model, require and export it:
 // module.exports.Tweet = require("./tweet.js");

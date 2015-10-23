@@ -31,9 +31,9 @@ $(document).ready(function(){
   	$('.myjobs').append(li);
   });
 
-    $('.claim').on('click', function (e) {
-    	e.preventDefault();
-    	var li = $(this).closest('li');
-    	$('.mycompletedjobs').append(li);
-    });
+    // $('.claim').on('click', function (e) {
+    // 	e.preventDefault();
+    // 	var li = $(this).closest('li');
+    // 	$('.mycompletedjobs').append(li);
+    // });
 });

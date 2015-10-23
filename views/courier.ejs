@@ -21,7 +21,23 @@
       <h1>Courier</h1>
         <div>
           <h2>queue</h2>
-
+          <ul class="jobs list-group" id="jobs">
+            <% jobs.forEach(function(job) { %>
+              <li class="job list-group-item">
+              <a href="/api/courier/<%= job._id %>">
+              <%= job.name %> 
+              <%= job.address %>  
+              <%= job.phone %> 
+              <%= job.order_time %> 
+              <%= job.order_contents %> 
+              <%= job.delivery_fee %> 
+              <%= job.delivery_tip %> 
+              <%= job.riders %> 
+              <span data-id="<%= job._id %>" class="btn btn-primary claim">claim</span>
+              </a>
+              </li>
+            <% }) %>
+          </ul>
         </div>
         <div>
           <h2>my jobs</h2>

@@ -19,7 +19,7 @@ var jobSchema = mongoose.Schema({
 	order_contents: [{
 		type: String,
 		 required: true
-	}],//This should work to make it so there can be an array of strings for multiple items in an order but check it in google.
+	}],
 	delivery_fee: {
 		type: Number, 
 		required: true
@@ -29,10 +29,10 @@ var jobSchema = mongoose.Schema({
 		type: Boolean, 
 		required: true
 	},
-	riders: [{
+	riders: {
 		type: Schema.Types.ObjectId, 
 		ref: 'Rider'
-	}],
+	},
 	date: { 
 		type: Date, 
 		default: Date.now 

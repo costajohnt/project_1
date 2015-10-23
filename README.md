@@ -130,3 +130,5 @@ This command allows you to run terminal _on Heroku's servers_. This is a handy w
             <span data-id="<%= job._id %>" class="close delete">X</span></li>
             <% }); %>
           </ul>
+
+  <% if !job.rider { %> this is for my queue div to make it so that any rider can grab jobs from the queue.  The other two divs for myjobs and mycompleted jobs will have if job.rider so that new riders cannot take a job that has already been claimed.

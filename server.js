@@ -23,6 +23,14 @@ app.use(session({
 	cookie: { maxAge: 600000 }
 }));
 
+app.get('/signup', function (req, res) {
+	res.render('signup');
+});
+
+app.get('/signin', function (req, res) {
+	res.render('signin');
+});
+
 
 //Project_1 Splash
 app.get('/', function(req, res) {
@@ -56,15 +64,17 @@ app.post('/api/riders', function (req, res) {
 	var rider = req.body;
     db.Rider.createSecure(rider.name, rider.password, function (err, rider) {
       req.session.riderId = rider._id;	
+      req.session.rider = rider;
   	  res.json({ rider: rider, msg: "Rider created successfully" });
- //  	  if (err) {
- //  		console.log(err);
- //  	  }else {
- //  		console.log(job);
- //      	res.json(rider);
- //  	}
+ // //  	  if (err) {
+ // //  		console.log(err);
+ // //  	  }else {
+ // //  		console.log(job);
+ // //      	res.json(rider);
+ // //  	}
   });
 });
+
 //create new job
 app.post('/api/jobs', function (req, res) {
 	db.Job.create(req.body, function (err, job) {
@@ -76,6 +86,13 @@ app.post('/api/jobs', function (req, res) {
 			res.json(job);
 		}	
 	});
+});
+
+app.get('/logout', function (req, res) {
+	req.session.riderId = null;
+	req.session.user = null;
+
+	res.json({ msg: "user successfully logged out"});
 });
 
 //find a job by its ID

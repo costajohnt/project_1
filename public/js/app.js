@@ -19,10 +19,9 @@ $(document).ready(function(){
 	});
   });
 
-//CREATE A NEW RIDER ON THE SPLASH PAGE
+//CREATE A NEW RIDER ON THE SPLASH PAGE now on the signup page wont work
   $('#signUp').on('submit', function (e) {
 	e.preventDefault();
-	console.log('form submitted');
 	var rider = $(this).serialize();
 	
 	$.post('/api/riders', rider, function (data) {
@@ -36,6 +35,15 @@ $(document).ready(function(){
 		console.log("failed to create new rider");
 	});
   });
+
+ //LOGOUT FROM SESSION
+ 	$('#logOut').click(function(e) {
+ 		e.preventDefault();
+
+ 		$.get('/logout', function(data) {
+ 			console.log(data.msg);
+ 		});
+ 	});
 
 //MOVE A JOB FROM THE QUEUE TO MY JOBS
   $('.claim').on('click', function (e) {

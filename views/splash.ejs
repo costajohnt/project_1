@@ -14,7 +14,7 @@
 	<script src="/js/app.js"></script>
 </head>
 
-<body id='splash'>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,15 +35,13 @@
         <li><a href="http://localhost:5000/dispatch">Dispatch</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">somelink</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Riders<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="/signup">sign up</a></li>
+            <li><a href="/signin">sign in</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#" id="logOut">log out</a></li>
           </ul>
         </li>
       </ul>
@@ -54,61 +52,5 @@
 		<header class="page-header">
 			<h1 class="text-center">#messlife</h1>
 		</header>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">sign up</button>
-				<!-- Modal -->
-				<form id='signUp'>
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-							</div>
-							<div class="modal-body">
-							<label for="name">Name</label>
-							<input type="text" name="name" class="form-control" placeholder="name">
-							<label for="password">Password</label>
-							<input type="text" name="password" class="form-control" placeholder="password">
-							<label for="confirm-password">Confirm Password</label>
-							<input type="text" name="confirm" class="form-control" placeholder="confirm password">
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				</form>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">sign in</button>
-				<!-- Modal -->
-				<form id='signIn'>http://localhost:5000/
-				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel2">Sign In</h4>
-							</div>
-							<div class="modal-body">
-							<label for="name">Name</label>
-							<input type="text" name="name" class="form-control" placeholder="name">
-							<label for="password">Password</label>
-							<input type="text" name="password" class="form-control" placeholder="password">
-							</div>
-							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				</form>
-			<div class="pull-left text-nowrap">
-				<a href="dispatch">DISPATCH</a>
-			</div>  
-			<div class="pull-right">
-				<a href="http://localhost:5000/courier">COURIER</a>
-			</div> 
-		</div>
+		<body id='splash'>
 	</body>

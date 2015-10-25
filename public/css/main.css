@@ -6,7 +6,11 @@
 	width: 100%;
 }
 
-#dispatch, #courier {
+.blackGround {
 	color: white;
 	background: black;
 }	
+
+#navWhite {
+	background: white;
+}

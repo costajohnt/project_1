@@ -21,7 +21,7 @@
       <h1>Courier</h1>
         <div>
           <h2>queue</h2>
-          <ul class="jobs list-group" id="jobs">
+          <ul class="jobs list-group">
             <% jobs.forEach(function(job) { %>
               <li class="job list-group-item">
               <a href="/api/courier/<%= job._id %>">
@@ -40,14 +40,12 @@
           </ul>
         </div>
         <div>
-          <h2>my jobs</h2>
-          <img src="http://placehold.it/350x150">
+          <h2>my jobs</h2>  
           <ul class="myjobs">
           </ul>
         </div> 
         <div>
           <h2>completed jobs</h2>
-          <img src="http://placehold.it/350x150">
           <ul class='mycompletedjobs'>
           </ul>
         </div> 

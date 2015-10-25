@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var jobSchema = mongoose.Schema({
+var JobSchema = mongoose.Schema({
 	name: {
 		type: String, 
 		required: true
@@ -39,7 +39,7 @@ var jobSchema = mongoose.Schema({
 	}
 });
 
-var Job = mongoose.model('Job', jobSchema);
+var Job = mongoose.model('Job', JobSchema);
 
 module.exports = Job;
 

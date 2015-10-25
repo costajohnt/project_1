@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-	bcrypt = require('bcrypt');
+var mongoose = require('mongoose'),
+	Schema = mongoose.Schema,
+	bcrypt = require('bcrypt'),
+	salt = bcrypt.genSaltSync(10);
 
-var Schema = mongoose.Schema;
-
-var riderSchema = mongoose.Schema({
+var RiderSchema = mongoose.Schema({
 	name: {
 		type: String, 
 		required: true
@@ -14,12 +14,14 @@ var riderSchema = mongoose.Schema({
 	}
 });
 
-riderSchema.statics.createSecure = function (name, password, callback) {
+RiderSchema.statics.createSecure = function (name, password, callback) {
+
   var rider = this;
+
   bcrypt.genSalt(function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
       console.log(hash);
-      user.create({
+      rider.create({
         name: name,
         passwordDigest: hash
       }, callback);
@@ -27,6 +29,6 @@ riderSchema.statics.createSecure = function (name, password, callback) {
   });
 };
 
-var Rider = mongoose.model('Rider', riderSchema);
+var Rider = mongoose.model('Rider', RiderSchema);
 
 module.exports = Rider;

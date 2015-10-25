@@ -6,12 +6,25 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var db = require("./models/index");
+var session = require('express-session');
 
+//Middleware
 app.set("view engine", "ejs");
 
-app.use(express.static("public"));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(express.static("public"));
+
+app.use(session({
+	saveUninitialized: true,
+	resave: true, 
+	secret: 'SuperSecretCookie',
+	cookie: { maxAge: 600000 }
+}));
+
+
+//Project_1 Splash
 app.get('/', function(req, res) {
   res.render("splash");
 });
@@ -27,6 +40,32 @@ app.get('/courier', function(req, res) {
 	});
 });
 
+//create new rider
+// app.post('/api/riders', function (req, res) {
+// 	db.Rider.create(req.body, function (err, rider) {
+// 		res.status(200).json(rider);
+// 		if (err) {
+// 			console.log(err);
+// 		}else {
+// 			console.log(job);
+// 			res.json(job);	
+// 		}
+// 	});
+// });
+app.post('/api/riders', function (req, res) {
+	var rider = req.body;
+    db.Rider.createSecure(rider.name, rider.password, function (err, rider) {
+      req.session.riderId = rider._id;	
+  	  res.json({ rider: rider, msg: "Rider created successfully" });
+ //  	  if (err) {
+ //  		console.log(err);
+ //  	  }else {
+ //  		console.log(job);
+ //      	res.json(rider);
+ //  	}
+  });
+});
+//create new job
 app.post('/api/jobs', function (req, res) {
 	db.Job.create(req.body, function (err, job) {
 		res.status(200).json(job);
@@ -39,9 +78,14 @@ app.post('/api/jobs', function (req, res) {
 	});
 });
 
-app.post('/riders', function (req, res) {
-  Rider.createSecure(req.body.email, req.body.password, function (err, rider) {
-    res.json(rider);
+//find a job by its ID
+app.get('/api/jobs/:id', function (req, res) {
+  db.Job.findById(req.params.id).exec(function (err, job) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.render('courier', {job: job});
+    }
   });
 });
 

@@ -32,3 +32,8 @@ We really need to work on this in general, the pages are looking wonky, especial
 
 <EXTERNAL API>
 I really want to incorporate the google api.  I want to set it up so that when a rider clicks on a header (queue, and myjobs), the view changes from a list of addresses to a small google map on the same page with pins in each address.  Ideally, we could click on a pin to see all of the other information about that job.  I dont even know if that is possible.  It would also be a super dope stretch to make it so we can automatically route biking directions between the base, the delivery addresses, and base again based on the amoount of time remaining on the order and the most efficient route in terms of distance and topography.
+
+Geolocation
+Places Search Box
+
+Iahve an id associated with a line.  When Iclick on that line I want it to grab the associated address and put into the google api

@@ -9,12 +9,13 @@
       <div>
         <h2>queue</h2>
         <ul class="jobs list-group">
+        <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
-            <a href="/api/courier/<%= job._id %>"><%= job.address %><br><%= job.date %>
-              <span data-id="<%= job._id %>" class="btn btn-primary claim">claim</span>
-            </a>
+            <a id="ticket<%= incrementer %>" href="#"><%= job.address %><br><%= job.date %>
+            </a><span data-id="<%= job._id %>" class="btn btn-primary claim">claim</span>
           </li>
+          <% incrementer++ %>
           <% }) %>
         </ul>
       </div>

@@ -1,25 +1,6 @@
 $(document).ready(function(){
 
-//CREATE NEW JOB ON THE DISPATCH PAGE
-  $('#newJob').on('submit', function (e) {
-	e.preventDefault();
-	var formData = $(this).serialize();
-
-	$.ajax({
-		url: '/api/jobs',
-		type: "POST",
-		data: formData
-	})
-	.done(function(data) {
-		console.log("successfully created a new job", data);
-		$('#newJob')[0].reset();
-	})
-	.fail(function(data) {
-		console.log("failed to create new job");
-	});
-  });
-
-//CREATE A NEW RIDER ON THE SPLASH PAGE now on the signup page wont work
+//CREATE A NEW RIDER 
   $('#signUp').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
@@ -36,7 +17,7 @@ $(document).ready(function(){
 	});
   });
 
- //USER SIGN IN
+ //RIDER SIGN IN
  	$('#signIn').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
@@ -64,6 +45,26 @@ $(document).ready(function(){
  		});
  	});
 
+ //CREATE NEW JOB ON THE DISPATCH PAGE
+   $('#newJob').on('submit', function (e) {
+ 	e.preventDefault();
+ 	var formData = $(this).serialize();
+
+ 	$.ajax({
+ 		url: '/api/jobs',
+ 		type: "POST",
+ 		data: formData
+ 	})
+ 	.done(function(data) {
+ 		console.log("successfully created a new job", data);
+ 		$('#newJob')[0].reset();
+ 	})
+ 	.fail(function(data) {
+ 		console.log("failed to create new job");
+ 	});
+   });
+
+
 //MOVE A JOB FROM THE QUEUE TO MY JOBS
   $('#jobs-list').on('click', '.claim', function (e) {
 	e.preventDefault();
@@ -78,6 +79,16 @@ $(document).ready(function(){
 	var job = $(this).parents('li');
 	$('.mycompletedjobs').append(job);
 	});
+
+
+// VIEW GOOGLE MAP WITH MARKER AT SELECTED ADDRESS
+$("[id^='ticket']").on('click', function(e){
+	e.preventDefault();
+	console.log(this.id);
+
+});
+
+
 });
 
 // $(data._id).find('complete')
@@ -85,3 +96,5 @@ $(document).ready(function(){
 // var jobHtml = "<li class='job list-group-item'>" + data.name + data.address + data.phone + data.order_time + data.order_contents + data.delivery_fee + data.delivery_tip + data.riders + "<span data-id='" + data._id + "' class='close delete'>X</span></li>";
 // $('.jobs').prepend(jobHtml);
  
+
+

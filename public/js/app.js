@@ -25,13 +25,32 @@ $(document).ready(function(){
 	var rider = $(this).serialize();
 	
 	$.post('/api/riders', rider, function (data) {
-		
+
 	})
 	.done(function(data) {
 		console.log("successfully created a new rider", data);
+		window.location.href = '/courier';
 	})
 	.fail(function(data) {
 		console.log("failed to create new rider");
+	});
+  });
+
+ //USER SIGN IN
+ 	$('#signIn').on('submit', function (e) {
+	e.preventDefault();
+	var rider = $(this).serialize();
+	console.log(rider);
+
+	$.post('/api/signin', rider, function (data) {
+
+	})
+	.success(function(data) {
+		console.log('logged in', data);
+		window.location.href = '/courier';
+	})
+	.error(function(data) {
+		console.log(data.responseText);
 	});
   });
 
@@ -41,24 +60,23 @@ $(document).ready(function(){
 
  		$.get('/logout', function(data) {
  			console.log(data.msg);
+ 			window.location.href = '/signin';
  		});
  	});
 
 //MOVE A JOB FROM THE QUEUE TO MY JOBS
-  $('.claim').on('click', function (e) {
+  $('#jobs-list').on('click', '.claim', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
 	$('.myjobs').append(job);
-	//I need the line below to target any list group item I click claim on by its data-id.  Then I need to do the same for the bottom
-	$('span[data-id=' + job._id + ']').text('complete').removeClass('.class').addClass('.complete'); //something is going on with this line.  I'm targeting a line by its specific ID but I need to target any line by any line's specific ID
-	});
+	$(job).find('.claim').text('complete').removeClass('claim').addClass('complete');
+});
 
 //MOVE A JOB FROM MYJOBS TO MYCOMPLETEDJOBS
-  $('.complete').on('click', function (e) {
+  $('#jobs-list').on('click', '.complete', function (e) {
 	e.preventDefault();
-
-	var li = $(this).parents('li');
-	$('.mycompletedjobs').append(li);
+	var job = $(this).parents('li');
+	$('.mycompletedjobs').append(job);
 	});
 });
 

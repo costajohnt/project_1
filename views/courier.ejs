@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html>
 <% include ./_head %>
+<% include ./_navbar %>
 <body class="blackGround">
-  <% include ./_navbar %>
   <div id="page-wrapper" class="container col-xs-6 col-xs-offset-3">
     <header class="page-header text-center">
       <h1>Courier</h1>
+    </header> 
+    <div id="jobs-list">
       <div>
         <h2>queue</h2>
         <ul class="jobs list-group">
           <% jobs.forEach(function(job) { %>
-          <li class="job list-group-item">
-            <a href="/api/courier/<%= job._id %>">
-              <%= job.name %> 
-              <%= job.address %>  
-              <%= job.phone %> 
-              <%= job.order_time %> 
-              <%= job.order_contents %> 
-              <%= job.delivery_fee %> 
-              <%= job.delivery_tip %> 
-              <%= job.riders %> 
+          <li class="job list-group-item" data-id="<%= job._id %>">
+            <a href="/api/courier/<%= job._id %>"><%= job.address %><br><%= job.date %>
               <span data-id="<%= job._id %>" class="btn btn-primary claim">claim</span>
             </a>
           </li>
@@ -36,9 +28,9 @@
         <ul class='mycompletedjobs'>
         </ul>
       </div> 
-    </header>  
+    </div>
   </div>
 </body>
-</html>
+
 
 

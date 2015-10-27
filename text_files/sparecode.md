@@ -33,3 +33,5 @@
          </li>
          <% incrementer++ %>
          <% }}) %>
+
+         <% if (!job.rider) { %>

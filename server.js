@@ -137,7 +137,7 @@ app.get('/api/jobs/:id', function (req, res) {
     if (err) {
       res.json(err);
     } else {
-      res.render('courier', {job: job});
+      res.render('courier', {job: job, userid: req.session.riderId});
     }
   });
 });
@@ -146,14 +146,24 @@ app.get('/api/jobs/:id', function (req, res) {
 //UPDATE A JOB TO ADD A RIDER !!!THIS IS INCOMPLETE WORK ON IT!!!!!
 app.put('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
-    console.log(job)
+    // console.log(job);
     job.rider = req.session.riderId;
-    console.log(job)
+    console.log('job with rider', job);
     job.save();
     res.json(job);  
   });
 });
 
+//UPDATE A JOB TO REMOVE A RIDER WHEN SENT BACK TO THE QUEUE
+app.put('/api/jobs/rider/:id', function (req, res) {
+  db.Job.findById(req.params.id, function(err, job) {
+    // console.log(job);
+    job.rider = undefined;
+    job.save();
+    console.log('job moved to queue', job);
+    res.json(job); 
+  });
+});
     app.listen(process.env.PORT || 5000);
     console.log('server is running');
 

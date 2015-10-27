@@ -26,6 +26,18 @@
       <div>
         <h2>my jobs</h2>  
         <ul class="myjobs list-group">
+        <% var incrementer = 0; %>
+          <% jobs.forEach(function(job) { %>
+          <% if (job.rider == userid) { %>
+          <li class="job list-group-item" data-id="<%= job._id %>">
+            <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
+            <a id="ticket<%= incrementer %>" href="#">
+              <%= job.address %> ,<%= job.date %>
+            </a>
+            <span data-id="<%= job._id %>" class="btn btn-default claim glyphicon glyphicon-plus"></span>
+          </li>
+          <% incrementer++ %>
+          <% }}) %>
         </ul>
       </div> 
       <div>

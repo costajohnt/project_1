@@ -67,18 +67,14 @@ $('#newJob').on('submit', function (e) {
 //DELETE A JOB FROM THE QUEUE AND DATABASE
 $('#jobs-list').on('click', '.remove', function (e) {
 	e.preventDefault();
-	console.log('delete button clicked');
 	var job = $(this).parents('li');
 	var jobId = job.attr('data-id');
-	console.log("job is: " + job);
-	console.log(jobId);
 
 	$.ajax({
 		url: '/api/jobs/' + jobId,
 		type: "DELETE",
 	})
 	.done(function(result) {
-		console.log('it works!')
 		job.remove();
 	})
 	.fail(function(data) {
@@ -86,7 +82,7 @@ $('#jobs-list').on('click', '.remove', function (e) {
 	});
 });
 
-//MOVE A JOB FROM THE QUEUE TO MY JOBS
+//MOVE A JOB FROM THE QUEUE TO MYJOBS
 $('#jobs-list').on('click', '.claim', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
@@ -100,20 +96,78 @@ $('#jobs-list').on('click', '.claim', function (e) {
 	.done(function(data) {
 		console.log("successfully added a rider", data);
 		$('.myjobs').append(job);
-		$(job).find('.claim').text('complete').removeClass('claim glyphicon glyphicon-plus').addClass('complete');
+		$(job).find('.remove').removeClass('remove').addClass('returnToQueue');
+		$(job).find('.claim').removeClass('claim').addClass('complete');
 	})
 	.fail(function(data) {
 		console.log("failed to add a rider");
 	});
 });
 
-//MOVE A JOB FROM MYJOBS TO MYCOMPLETEDJOBS
+//MOVE A JOB FROM MYJOBS BACK TO THE QUEUE
+//IS IT REMOVING THE RIDER FROM THE OBJECT WHEN I RETURN IT TO THE QUEUE
+$('#jobs-list').on('click', '.returnToQueue', function (e) {
+	e.preventDefault();
+	var job = $(this).parents('li');
+
+	$.ajax({
+		url: '/api/jobs/rider/' + $(this).data('id'),
+		type: "PUT",
+		data: job
+	})
+	.done(function(data) {
+		console.log('successfully returned to queue');
+		$(job).find('.returnToQueue').removeClass('returnToQueue').addClass('remove');
+		$(job).find('.complete').removeClass('complete').addClass('claim');
+		$('.jobs').append(job);
+	})
+	.fail(function(data) {
+		console.log('failed to return to queue');
+	});
+});
+
+// MOVE A JOB FROM MYJOBS TO MYCOMPLETEDJOBS
 $('#jobs-list').on('click', '.complete', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
-	$('.mycompletedjobs').append(job);
+
+	$.ajax({
+		url: '/api/jobs/' + $(this).data('id'),
+		type: "PUT",
+		data: job
+	})
+	.done(function(data) {
+		console.log("job completed");
+		$(job).find('.complete').hide();
+		$(job).find('.returnToQueue').removeClass('returnToQueue').addClass('returnToMyJobs');
+		$('.mycompletedjobs').append(job);
+	})
+	.fail(function(data) {
+		console.log('failed to compete job');
+	});
 });
 
+//MOVE A JOB FROM MYCOMPLETEDJOBS BACK TO MYJOBS
+$('#jobs-list').on('click', '.returnToMyJobs', function (e) {
+	e.preventDefault();
+	var job = $(this).parents('li');
+	// $('.myjobs').append(job);
+
+	$.ajax({
+		url: '/api/jobs/' + $(this).data('id'),
+		type: "PUT",
+		data: job
+	})
+	.done(function(data) {
+		console.log("job sent back to my jobs");
+		$(job).find('.complete').show();
+		$(job).find('.returnToMyJobs').removeClass('returnToMyJobs').addClass('returnToQueue');
+		$('.myjobs').append(job);
+	})
+	.fail(function(data) {
+		console.log('failed to return job to myjobs');
+	});
+});
 
 // VIEW GOOGLE MAP WITH MARKER AT SELECTED ADDRESS
 $("[id^='ticket']").on('click', function(e){

@@ -32,6 +32,7 @@ $('#signIn').on('submit', function (e) {
 	})
 	.error(function(data) {
 		console.log(data.responseText);
+		alert("sign in failed, wrong username or password");
 	});
 });
 
@@ -105,7 +106,6 @@ $('#jobs-list').on('click', '.claim', function (e) {
 });
 
 //MOVE A JOB FROM MYJOBS BACK TO THE QUEUE
-//IS IT REMOVING THE RIDER FROM THE OBJECT WHEN I RETURN IT TO THE QUEUE
 $('#jobs-list').on('click', '.returnToQueue', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
@@ -116,7 +116,7 @@ $('#jobs-list').on('click', '.returnToQueue', function (e) {
 		data: job
 	})
 	.done(function(data) {
-		console.log('successfully returned to queue');
+		console.log('successfully returned to queue', data);
 		$(job).find('.returnToQueue').removeClass('returnToQueue').addClass('remove');
 		$(job).find('.complete').removeClass('complete').addClass('claim');
 		$('.jobs').append(job);
@@ -132,12 +132,12 @@ $('#jobs-list').on('click', '.complete', function (e) {
 	var job = $(this).parents('li');
 
 	$.ajax({
-		url: '/api/jobs/' + $(this).data('id'),
+		url: '/api/jobs/complete/' + $(this).data('id'),
 		type: "PUT",
 		data: job
 	})
 	.done(function(data) {
-		console.log("job completed");
+		console.log("job completed", job);
 		$(job).find('.complete').hide();
 		$(job).find('.returnToQueue').removeClass('returnToQueue').addClass('returnToMyJobs');
 		$('.mycompletedjobs').append(job);

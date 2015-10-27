@@ -23,7 +23,7 @@ app.use(session({
 	cookie: { maxAge: 600000 }
 }));
 
-//ROUTES
+//ROUTES!!!ROUTES!!!!ROUTES!!!!!ROUTES!!!!
 //GET SIGNUP PAGE
 app.get('/signup', function (req, res) {
 	res.render('signup');
@@ -52,12 +52,14 @@ app.get('/courier', function (req, res) {
 	});
 });
 
+//CLICKING ON THE JOB HREF SENDS THE USER TO A PAGE DISPLAYING ALL THE JOB DATA !!!!WORK ON THIS!!!!
 app.get('/fulljob', function (req, res) {
   db.Job.find({}, function (err, jobs) {
     if (err) console.log(err);
     res.render('fulljob', { jobs: jobs });
   });
 });
+
 //CREATE A NEW RIDER
 app.post('/api/riders', function (req, res) {
 	var rider = req.body;
@@ -141,9 +143,8 @@ app.get('/api/jobs/:id', function (req, res) {
     }
   });
 });
-//VIEW 
 
-//UPDATE A JOB TO ADD A RIDER !!!THIS IS INCOMPLETE WORK ON IT!!!!!
+//UPDATE A JOB TO ADD A RIDER 
 app.put('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
     // console.log(job);
@@ -164,6 +165,18 @@ app.put('/api/jobs/rider/:id', function (req, res) {
     res.json(job); 
   });
 });
-    app.listen(process.env.PORT || 5000);
-    console.log('server is running');
+
+//UPDATE A JOB TO BE MARKED AS COMPLETE WHEN SENT TO MYCOMPLETEDJOBS
+app.put('/api/jobs/complete/:id', function (req, res) {
+  db.Job.findById(req.params.id, function(err, job) {
+    job.completed = true;
+    job.save();
+    console.log('job completed', job);
+    res.json(job);
+  });
+});
+
+//DO NOT ALTER BELOW
+app.listen(process.env.PORT || 5000);
+console.log('server is running');
 

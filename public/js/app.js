@@ -137,7 +137,7 @@ $('#jobs-list').on('click', '.complete', function (e) {
 		data: job
 	})
 	.done(function(data) {
-		console.log("job completed", job);
+		console.log("job completed, changed complete to true", data);
 		$(job).find('.complete').hide();
 		$(job).find('.returnToQueue').removeClass('returnToQueue').addClass('returnToMyJobs');
 		$('.mycompletedjobs').append(job);
@@ -151,17 +151,16 @@ $('#jobs-list').on('click', '.complete', function (e) {
 $('#jobs-list').on('click', '.returnToMyJobs', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
-	// $('.myjobs').append(job);
 
 	$.ajax({
-		url: '/api/jobs/' + $(this).data('id'),
+		url: '/api/jobs/incomplete/' + $(this).data('id'),
 		type: "PUT",
 		data: job
 	})
 	.done(function(data) {
-		console.log("job sent back to my jobs");
-		$(job).find('.complete').show();
+		console.log("job sent back to my jobs, complete changed to false", data);
 		$(job).find('.returnToMyJobs').removeClass('returnToMyJobs').addClass('returnToQueue');
+		$(job).find('.complete').show();
 		$('.myjobs').append(job);
 	})
 	.fail(function(data) {
@@ -170,11 +169,11 @@ $('#jobs-list').on('click', '.returnToMyJobs', function (e) {
 });
 
 // VIEW GOOGLE MAP WITH MARKER AT SELECTED ADDRESS
-$("[id^='ticket']").on('click', function(e){
-	e.preventDefault();
-	console.log(this.id);
-	window.location.href = '/fulljob';
-});
+// $("[id^='ticket']").on('click', function(e){
+// 	e.preventDefault();
+// 	console.log(this.id);
+// 	// window.location.href = '/fulljob';
+// });
 });
 
 

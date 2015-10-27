@@ -14,7 +14,7 @@
           <% if (!job.rider && job.completed === false) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
             <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
-            <a id="ticket<%= incrementer %>" href="#">
+            <a id="ticket<%= incrementer %>" href="/fulljob/<%= job._id %>">
               <%= job.address %> ,<%= job.date %>
             </a>
             <span data-id="<%= job._id %>" class="btn btn-default claim glyphicon glyphicon-plus"></span>
@@ -30,11 +30,11 @@
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === false) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
-            <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
-            <a id="ticket<%= incrementer %>" href="#">
+            <span data-id="<%= job._id %>" class="btn btn-default returnToQueue glyphicon glyphicon-minus"></span>
+            <a id="ticket<%= incrementer %>" href="/fulljob/<%= job._id %>">
               <%= job.address %> ,<%= job.date %>
             </a>
-            <span data-id="<%= job._id %>" class="btn btn-default claim glyphicon glyphicon-plus"></span>
+            <span data-id="<%= job._id %>" class="btn btn-default complete glyphicon glyphicon-plus"></span>
           </li>
           <% incrementer++ %>
           <% }}) %>
@@ -47,11 +47,10 @@
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === true) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
-            <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
+            <span data-id="<%= job._id %>" class="btn btn-default returnToMyJobs glyphicon glyphicon-minus"></span>
             <a id="ticket<%= incrementer %>" href="#">
               <%= job.address %> ,<%= job.date %>
             </a>
-            <span data-id="<%= job._id %>" class="btn btn-default claim glyphicon glyphicon-plus"></span>
           </li>
           <% incrementer++ %>
           <% }}) %>

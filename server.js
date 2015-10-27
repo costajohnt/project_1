@@ -52,14 +52,6 @@ app.get('/courier', function (req, res) {
 	});
 });
 
-//CLICKING ON THE JOB HREF SENDS THE USER TO A PAGE DISPLAYING ALL THE JOB DATA !!!!WORK ON THIS!!!!
-app.get('/fulljob', function (req, res) {
-  db.Job.find({}, function (err, jobs) {
-    if (err) console.log(err);
-    res.render('fulljob', { jobs: jobs });
-  });
-});
-
 //CREATE A NEW RIDER
 app.post('/api/riders', function (req, res) {
 	var rider = req.body;
@@ -133,17 +125,6 @@ app.delete('/api/jobs/:id', function (req, res) {
   });
 });
 
-//FIND A JOB BY ITS ID !!!!NOT WORKING!!!!!
-app.get('/api/jobs/:id', function (req, res) {
-  db.Job.findById(req.params.id).exec(function (err, job) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.render('courier', {job: job, userid: req.session.riderId});
-    }
-  });
-});
-
 //UPDATE A JOB TO ADD A RIDER 
 app.put('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
@@ -175,6 +156,37 @@ app.put('/api/jobs/complete/:id', function (req, res) {
     res.json(job);
   });
 });
+
+//UPDATE A JOB TO BE MARKED AS NOT COMPLETED WHEN RETURNED TO MYJOBS
+app.put('/api/jobs/incomplete/:id', function (req, res) {
+  db.Job.findById(req.params.id, function(err, job) {
+    job.completed = false;
+    job.save();
+    console.log('job marked as complete is false', job);
+    res.json(job);
+  });
+});
+
+//CLICKING ON THE JOB HREF SENDS THE USER TO A PAGE DISPLAYING ALL THE JOB DATA !!!!WORK ON THIS!!!!
+app.get('/fulljob/:id', function (req, res) {
+  console.log("hitting show route", req.params.id)
+  db.Job.findById(req.params.id, function (err, job) {
+    if (err) console.log(err);
+    res.render('fulljob', { job: job });
+  });
+});
+
+
+// //FIND A JOB BY ITS ID !!!!NOT WORKING!!!!!
+// app.get('/api/jobs/:id', function (req, res) {
+//   db.Job.findById(req.params.id).exec(function (err, job) {
+//     if (err) {
+//       res.json(err);
+//     } else {
+//       res.render('courier', {job: job, userid: req.session.riderId});
+//     }
+//   });
+// });
 
 //DO NOT ALTER BELOW
 app.listen(process.env.PORT || 5000);

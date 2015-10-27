@@ -1,0 +1,14 @@
+<ul class="jobs list-group">
+<% jobs.forEach(function(job) { %>
+	<li class="job list-group-item">
+		<%= job.name %>
+		<%= job.address %> 
+		<%= job.phone %>
+		<%= job.order_time %>
+		<%= job.order_contents %>
+		<%= job.delivery_fee %>
+		<%= job.delivery_tip %>
+		<%= job.riders %>
+	</li>
+	<% }) %>
+</ul>

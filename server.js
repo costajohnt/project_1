@@ -23,6 +23,7 @@ app.use(session({
 	cookie: { maxAge: 600000 }
 }));
 
+//ROUTES
 //GET SIGNUP PAGE
 app.get('/signup', function (req, res) {
 	res.render('signup');
@@ -47,10 +48,16 @@ app.get('/dispatch', function(req, res) {
 app.get('/courier', function (req, res) {
 	db.Job.find({}, function (err, jobs) {
 		if (err) console.log(err);
-		res.render('courier', { jobs: jobs });
+		res.render('courier', { jobs: jobs, userid: req.session.riderId });
 	});
 });
 
+app.get('/fulljob', function (req, res) {
+  db.Job.find({}, function (err, jobs) {
+    if (err) console.log(err);
+    res.render('fulljob', { jobs: jobs });
+  });
+});
 //CREATE A NEW RIDER
 app.post('/api/riders', function (req, res) {
 	var rider = req.body;
@@ -72,7 +79,7 @@ app.post('/api/signin', function (req, res) {
   db.Rider.authenticate(rider.name, rider.password, function (err, rider) {
     if (err) {
       console.log(err);
-      res.send(401, err)
+      res.send(401, err);
     } else {
       req.session.riderId = rider._id;  
       req.session.rider = rider;
@@ -103,7 +110,6 @@ app.get('/logout', function (req, res) {
 	res.json({ msg: "user successfully logged out"});
 });
 
-
 //CREATE A NEW JOB
 app.post('/api/jobs', function (req, res) {
 	db.Job.create(req.body, function (err, job) {
@@ -117,6 +123,14 @@ app.post('/api/jobs', function (req, res) {
 	});
 });
 
+//DELETE A JOB IN THE QUEUE
+app.delete('/api/jobs/:id', function (req, res) {
+  db.Job.findById(req.params.id, function(err, job) {
+    job.remove();
+    res.status(200).json(job);
+  });
+});
+
 //FIND A JOB BY ITS ID !!!!NOT WORKING!!!!!
 app.get('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id).exec(function (err, job) {
@@ -127,54 +141,19 @@ app.get('/api/jobs/:id', function (req, res) {
     }
   });
 });
+//VIEW 
 
-//UPDATE A JOB TO ADD A RIDER
+//UPDATE A JOB TO ADD A RIDER !!!THIS IS INCOMPLETE WORK ON IT!!!!!
 app.put('/api/jobs/:id', function (req, res) {
-  db.Job.findById(req.params.id);
-  job.ride = req.session.riderId;
-  job.save();
-  res.json(job);
+  db.Job.findById(req.params.id, function(err, job) {
+    console.log(job)
+    job.rider = req.session.riderId;
+    console.log(job)
+    job.save();
+    res.json(job);  
+  });
 });
 
     app.listen(process.env.PORT || 5000);
     console.log('server is running');
-
-
-
-//create new rider
-// app.post('/api/riders', function (req, res) {
-// 	db.Rider.create(req.body, function (err, rider) {
-// 		res.status(200).json(rider);
-// 		if (err) {
-// 			console.log(err);
-// 		}else {
-// 			console.log(job);
-// 			res.json(job);	
-// 		}
-// 	});
-// });
-
-
-// var Job = require('./models/job.js');
-// var Rider = require('./models/rider.js');
-
-// var jobs = [{ name: 'Johnny Cakes', address: '1850 Fulton St. #9', phone_number: 2012139855, order_time: '11:07PM', delivery_contents: 'large pepperoni pizza', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: true},
-// 			{ name: 'John Donson', address: '1200 Fulton St. #9', phone_number: 4158605098, order_time: '11:07PM', delivery_contents: 'cheese steak', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: false},
-// 			{ name: 'James Cakes', address: '1850 Atalays St.', phone_number: 2012139855, order_time: '1:30PM', delivery_contents: 'tacos', delivery_fee: '$3.00', delivery_tip: '$5.00', cash: true}];
-
-// app.get('/jobs', function (req, res) {
-// 	res.json(jobs);
-// });
-
-// app.get('/api/jobs', function(req, res) {
-// 	res.json(jobs);
-// });
-
-// app.get('/', function(req, res) {
-//   res.send("Hellow World!");
-// });
-
-// app.listen(3000, function() {
-//   console.log("express-heroku-starter is running on port 3000");
-// });
 

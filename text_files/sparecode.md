@@ -22,3 +22,14 @@
               <%= job.riders %> 
                   <%= job.name %> 
        <%= job.phone %> 
+
+
+       <% var incrementer = 0; %>
+         <% jobs.forEach(function(job) { %>
+         <% if (job.rider == userid) { %>
+         <li class="job list-group-item" data-id="<%= job._id %>">
+           <a id="ticket<%= incrementer %>" href="#"><%= job.address %><%= job.date %>
+           </a><span data-id="<%= job._id %>"></span>
+         </li>
+         <% incrementer++ %>
+         <% }}) %>

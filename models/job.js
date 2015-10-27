@@ -27,15 +27,15 @@ var JobSchema = mongoose.Schema({
 	delivery_tip: Number,
 	cash_payment: {
 		type: Boolean, 
-		required: true
+		required: false
 	},
-	riders: {
+	rider: {
 		type: Schema.Types.ObjectId, 
 		ref: 'Rider'
 	},
 	date: { 
 		type: Date, 
-		default: Date.now 
+		default: Date.now
 	}
 });
 

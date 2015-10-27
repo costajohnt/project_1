@@ -37,3 +37,6 @@ Geolocation
 Places Search Box
 
 Iahve an id associated with a line.  When Iclick on that line I want it to grab the associated address and put into the google api
+
+
+HERE IS WHAT I WANT, WHEN YOU CLICK ON THE LINK OF A JOB, IT SENDS YOU TO A PAGE WITH ALL OF THE JOB DATA DISPLAYED, PLUS ITS MARKER ON A MAP.  MAKE IT HAPPEN

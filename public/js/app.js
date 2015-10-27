@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 //CREATE A NEW RIDER 
-  $('#signUp').on('submit', function (e) {
+$('#signUp').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
 	
@@ -15,10 +15,10 @@ $(document).ready(function(){
 	.fail(function(data) {
 		console.log("failed to create new rider");
 	});
-  });
+});
 
- //RIDER SIGN IN
- 	$('#signIn').on('submit', function (e) {
+//RIDER SIGN IN
+$('#signIn').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
 	console.log(rider);
@@ -33,68 +33,94 @@ $(document).ready(function(){
 	.error(function(data) {
 		console.log(data.responseText);
 	});
-  });
+});
 
- //LOGOUT FROM SESSION
- 	$('#logOut').click(function(e) {
- 		e.preventDefault();
+//LOGOUT FROM SESSION
+$('#logOut').click(function(e) {
+	e.preventDefault();
 
- 		$.get('/logout', function(data) {
- 			console.log(data.msg);
- 			window.location.href = '/signin';
- 		});
- 	});
+	$.get('/logout', function(data) {
+		console.log(data.msg);
+		window.location.href = '/signin';
+	});
+});
 
- //CREATE NEW JOB ON THE DISPATCH PAGE
-   $('#newJob').on('submit', function (e) {
- 	e.preventDefault();
- 	var formData = $(this).serialize();
+//CREATE NEW JOB ON THE DISPATCH PAGE
+$('#newJob').on('submit', function (e) {
+	e.preventDefault();
+	var job = $(this).serialize();
 
- 	$.ajax({
- 		url: '/api/jobs',
- 		type: "POST",
- 		data: formData
- 	})
- 	.done(function(data) {
- 		console.log("successfully created a new job", data);
- 		$('#newJob')[0].reset();
- 	})
- 	.fail(function(data) {
- 		console.log("failed to create new job");
- 	});
-   });
+	$.ajax({
+		url: '/api/jobs',
+		type: "POST",
+		data: job
+	})
+	.done(function(data) {
+		console.log("successfully created a new job", data);
+		$('#newJob')[0].reset();
+	})
+	.fail(function(data) {
+		console.log("failed to create new job");
+	});
+});
 
+//DELETE A JOB FROM THE QUEUE AND DATABASE
+$('#jobs-list').on('click', '.remove', function (e) {
+	e.preventDefault();
+	console.log('delete button clicked');
+	var job = $(this).parents('li');
+	var jobId = job.attr('data-id');
+	console.log("job is: " + job);
+	console.log(jobId);
+
+	$.ajax({
+		url: '/api/jobs/' + jobId,
+		type: "DELETE",
+	})
+	.done(function(result) {
+		console.log('it works!')
+		job.remove();
+	})
+	.fail(function(data) {
+		console.log("failed to delete job");
+	});
+});
 
 //MOVE A JOB FROM THE QUEUE TO MY JOBS
-  $('#jobs-list').on('click', '.claim', function (e) {
+$('#jobs-list').on('click', '.claim', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
-	$('.myjobs').append(job);
-	$(job).find('.claim').text('complete').removeClass('claim').addClass('complete');
+	console.log($(this).data('id'));
+
+	$.ajax({
+		url: '/api/jobs/' + $(this).data('id'),
+		type: "PUT",
+		data: job
+	})
+	.done(function(data) {
+		console.log("successfully added a rider", data);
+		$('.myjobs').append(job);
+		$(job).find('.claim').text('complete').removeClass('claim glyphicon glyphicon-plus').addClass('complete');
+	})
+	.fail(function(data) {
+		console.log("failed to add a rider");
+	});
 });
 
 //MOVE A JOB FROM MYJOBS TO MYCOMPLETEDJOBS
-  $('#jobs-list').on('click', '.complete', function (e) {
+$('#jobs-list').on('click', '.complete', function (e) {
 	e.preventDefault();
 	var job = $(this).parents('li');
 	$('.mycompletedjobs').append(job);
-	});
+});
 
 
 // VIEW GOOGLE MAP WITH MARKER AT SELECTED ADDRESS
 $("[id^='ticket']").on('click', function(e){
 	e.preventDefault();
 	console.log(this.id);
-
+	window.location.href = '/fulljob';
 });
-
-
 });
-
-// $(data._id).find('complete')
-// $('span[data-id=' + data._id + ']')
-// var jobHtml = "<li class='job list-group-item'>" + data.name + data.address + data.phone + data.order_time + data.order_contents + data.delivery_fee + data.delivery_tip + data.riders + "<span data-id='" + data._id + "' class='close delete'>X</span></li>";
-// $('.jobs').prepend(jobHtml);
- 
 
 

@@ -7,6 +7,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var db = require("./models/index");
 var session = require('express-session');
+var cookieparser = require('cookie-parser');
 
 //Middleware
 app.set("view engine", "ejs");
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
+app.use(cookieparser());
 
 app.use(session({
 	saveUninitialized: true,
@@ -52,12 +54,13 @@ app.get('/courier', function (req, res) {
 	});
 });
 
-//CREATE A NEW RIDER
+//CREATE A NEW RIDER SIGNUP
 app.post('/api/riders', function (req, res) {
 	var rider = req.body;
     db.Rider.createSecure(rider.name, rider.password, function (err, rider) {
       req.session.riderId = rider._id;	
       req.session.rider = rider;
+      res.cookie('riderId', rider._id);
   	  // res.json({ rider: rider, msg: "Rider created successfully" });
   	  if (err) {
   		  console.log(err);
@@ -65,6 +68,11 @@ app.post('/api/riders', function (req, res) {
       	res.json(rider);
   	}
   });
+});
+
+//SETTING SESSION COOKIE???
+app.get('/currentrider', function (req, res) {
+  res.json({ rider: req.session.rider, cookie: req.cookies.riderId });
 });
 
 //SIGN IN RIDER
@@ -77,6 +85,7 @@ app.post('/api/signin', function (req, res) {
     } else {
       req.session.riderId = rider._id;  
       req.session.rider = rider;
+      res.cookie('riderId', rider._id);
       res.json(rider);
     }
   });
@@ -93,14 +102,18 @@ app.post('/sessions', function (req, res) {
     } else {
       console.log('setting session rider id ', loggedInRider._id);
       req.session.riderId = loggedInRider._id;
+      res.cookie('riderId', rider._id);
       res.redirect('/profile');
     }
   });
 });
 
+//
+
 //LOGOUT RIDER AND TERMINATE SESSION
 app.get('/logout', function (req, res) {
 	req.session.riderId = null;
+  res.clearCookie('riderId', {path: '/'});
 	res.json({ msg: "user successfully logged out"});
 });
 

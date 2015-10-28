@@ -1,5 +1,17 @@
 $(document).ready(function(){
 
+	function checkAuth() {
+		$.get('/currentrider', function (data) {
+			if (data.rider || data.cookie) {
+				console.log("worked");
+			}else {
+				console.log("didnt worked");
+			}
+		});
+	}
+	
+	checkAuth();
+
 //CREATE A NEW RIDER 
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
@@ -24,12 +36,13 @@ $('#signIn').on('submit', function (e) {
 	console.log(rider);
 
 	$.post('/api/signin', rider, function (data) {
-
 	})
+
 	.success(function(data) {
 		console.log('logged in', data);
 		window.location.href = '/courier';
 	})
+
 	.error(function(data) {
 		console.log(data.responseText);
 		alert("sign in failed, wrong username or password");

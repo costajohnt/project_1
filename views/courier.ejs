@@ -7,7 +7,7 @@
     </header> 
     <div class="text-centerc" id="jobs-list">
       <div>
-        <h2>queue</h2>
+        <h2><a href="#">queue</a></h2>
         <ul class="jobs list-group">
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
@@ -33,7 +33,7 @@
         </ul>
       </div>
       <div>
-        <h2>my jobs</h2>  
+        <h2><a href="#">my jobs</a></h2>  
         <ul class="myjobs list-group">
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
@@ -58,14 +58,14 @@
         </ul>
       </div> 
       <div>
-        <h2>completed jobs</h2>
+        <h2><a href="#">completed jobs</a></h2>
         <ul class='mycompletedjobs list-group'>
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === true) { %>
           <li class="job list-group-item text-center" data-id="<%= job._id %>">
            <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-minus returnToMyJobs"></span>
-           <a class="btn btn-default" role="button" data-toggle="collapse" href="#<%= job._id %>" aria-expanded="false" aria-controls="<%= job._id %>" id="ticket<%= incrementer %>" href="<%= job._id %>">
+           <a class="btn btn-danger" role="button" data-toggle="collapse" href="#<%= job._id %>" aria-expanded="false" aria-controls="<%= job._id %>" id="ticket<%= incrementer %>" href="<%= job._id %>">
              <%= job.address %>, <%= job.phone %>
            </a>
            <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-plus complete"></span>

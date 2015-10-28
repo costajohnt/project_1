@@ -50,7 +50,7 @@ app.get('/dispatch', function(req, res) {
 app.get('/courier', function (req, res) {
 	db.Job.find({}, function (err, jobs) {
 		if (err) console.log(err);
-		res.render('courier', { jobs: jobs, userid: req.session.riderId });
+		res.render('courier', { jobs: jobs, userid: req.session.riderId, userCookie: req.cookies.riderId });
 	});
 });
 
@@ -91,25 +91,6 @@ app.post('/api/signin', function (req, res) {
   });
 });
 
-// // AUTHENTICATE RIDER
-// app.post('/sessions', function (req, res) {
-//   //CALL AUTHENTICATE FUNCTION TO CHECK IF PASSWORD RIDER ENTERED IS CORRECT
-//   var rider = req.body;
-//   db.Rider.authenticate(rider.name, rider.password, function (err, loggedInRider) {
-//     if (err){
-//       console.log('authentication error: ', err);
-//       res.status(500).send();
-//     } else {
-//       console.log('setting session rider id ', loggedInRider._id);
-//       req.session.riderId = loggedInRider._id;
-//       res.cookie('riderId', rider._id);
-//       res.redirect('/profile');
-//     }
-//   });
-// });
-
-//
-
 //LOGOUT RIDER AND TERMINATE SESSION
 app.get('/logout', function (req, res) {
 	req.session.riderId = null;
@@ -143,6 +124,7 @@ app.put('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
     // console.log(job);
     job.rider = req.session.riderId;
+
     console.log('job with rider', job);
     job.save();
     res.json(job);  

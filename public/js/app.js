@@ -19,6 +19,9 @@ $(document).ready(function(){
 
 	checkAuth();
 
+$('#signIn').validate();
+$('#rider-name-sign-up').focus();
+$('#rider-name-sign-in').focus();
 //CREATE A NEW RIDER 
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
@@ -37,6 +40,7 @@ $('#signUp').on('submit', function (e) {
 	});
 });
 
+	checkAuth();
 //RIDER SIGN IN
 $('#signIn').on('submit', function (e) {
 	e.preventDefault();
@@ -49,11 +53,10 @@ $('#signIn').on('submit', function (e) {
 	.success(function(data) {
 		console.log('logged in', data);
 		$('.not-logged-in').hide();
+
 		
 		window.location.href = '/courier';
-
 	})
-
 	.error(function(data) {
 		console.log(data.responseText);
 		alert("sign in failed, wrong username or password");

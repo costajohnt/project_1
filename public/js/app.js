@@ -1,15 +1,22 @@
+//HIDE THE COURIER AND DISPATCH LINES WHEN YOU HIT SPLASH PAGE
+//SHOW THE PAGES WHEN A USER LOGS IN
+//WATCH BRAUS EXPRESS VIDEO 16 FOR STEP BY STEP INSTRUCTION
+//YOU ARE GOING TO TARGET APP.JS AND COURIER.JS AND THE NAVBAR
 $(document).ready(function(){
 
 	function checkAuth() {
 		$.get('/currentrider', function (data) {
 			if (data.rider || data.cookie) {
 				console.log("worked");
+				//this needs work
+				// $('#nav-signin').hide();
+				// $('#nav-signup').hide();
 			}else {
 				console.log("didnt worked");
 			}
 		});
 	}
-	
+
 	checkAuth();
 
 //CREATE A NEW RIDER 
@@ -40,7 +47,11 @@ $('#signIn').on('submit', function (e) {
 
 	.success(function(data) {
 		console.log('logged in', data);
+		//these are links to the links on the nav bar.  I want to be able to hide them when a user is signed in.
+		// $('#nav-signin').hide();
+		// $('#nav-signup').hide();
 		window.location.href = '/courier';
+
 	})
 
 	.error(function(data) {

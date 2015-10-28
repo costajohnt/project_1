@@ -12,7 +12,7 @@ var JobSchema = mongoose.Schema({
 		required: true
 	},
 	phone: {
-		type: Number, 
+		type: String, 
 		required: true
 	},
 	
@@ -21,10 +21,10 @@ var JobSchema = mongoose.Schema({
 		 required: true
 	}],
 	delivery_fee: {
-		type: Number, 
+		type: String, 
 		required: true
 	},
-	delivery_tip: Number,
+	delivery_tip: String,
 	cash_payment: {
 		type: Boolean, 
 		required: false

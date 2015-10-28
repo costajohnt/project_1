@@ -152,7 +152,6 @@ app.put('/api/jobs/:id', function (req, res) {
 //UPDATE A JOB TO REMOVE A RIDER WHEN SENT BACK TO THE QUEUE
 app.put('/api/jobs/rider/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
-    // console.log(job);
     job.rider = undefined;
     job.save();
     console.log('job moved to queue', job);
@@ -182,7 +181,7 @@ app.put('/api/jobs/incomplete/:id', function (req, res) {
 
 //CLICKING ON THE JOB HREF SENDS THE USER TO A PAGE DISPLAYING ALL THE JOB DATA !!!!WORK ON THIS!!!!
 app.get('/fulljob/:id', function (req, res) {
-  console.log("hitting show route", req.params.id)
+  console.log("hitting show route", req.params.id);
   db.Job.findById(req.params.id, function (err, job) {
     if (err) console.log(err);
     res.render('fulljob', { job: job });

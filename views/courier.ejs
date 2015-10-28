@@ -11,7 +11,6 @@
         <ul class="jobs list-group">
         <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
-      <!--     FIND A WAY TO ACCESS THE COOKIE VIA JQUERY AND ADD IT AS A CONDITION BELOW SO THAT THEY CAN DISPLAY -->
           <% if (!job.rider && job.completed === false) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
             <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>

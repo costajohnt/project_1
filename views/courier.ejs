@@ -13,28 +13,23 @@
           <% jobs.forEach(function(job) { %>
           <!-- SET CONDITION BELOW FOR COOKIES -->
           <% if (!job.rider && job.completed === false) { %>
-          <li class="job list-group-item" data-id="<%= job._id %>">
-            <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
-            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
-              <%= job.address %> ,<%= job.date %>
+          <li class="job list-group-item text-center" data-id="<%= job._id %>">
+            <span data-id="<%= job._id %>" class="btn btn-primary remove glyphicon glyphicon-minus"></span>
+            <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
+              <%= job.address %>, <%= job.phone %>
             </a>
             <span data-id="<%= job._id %>" class="btn btn-primary claim glyphicon glyphicon-plus"></span>
             <div class="collapse" id="collapseExample">
-              <div class="well">
-                <%= job.name %>
-                <%= job.address %> 
-                <%= job.phone %>
-                <%= job.order_time %>
-                <%= job.order_contents %>
-                <%= job.delivery_fee %>
-                <%= job.delivery_tip %>
-                <%= job.riders %>
+              <div class="well text-center">
+                <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
+                <%= job.order_contents %><br>
+                CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
+                <%= job.date %>
               </div>
             </div>
           </li>
           <% incrementer++ %>
           <% }}) %>
-
         </ul>
       </div>
       <div>
@@ -43,22 +38,18 @@
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === false) { %>
-                   <li class="job list-group-item" data-id="<%= job._id %>">
-            <span data-id="<%= job._id %>" class="btn btn-default glyphicon glyphicon-minus returnToQueue"></span>
-            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
-              <%= job.address %> ,<%= job.date %>
+          <li class="job list-group-item text-center" data-id="<%= job._id %>">
+            <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-minus returnToQueue"></span>
+            <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
+              <%= job.address %>, <%= job.phone %>
             </a>
             <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-plus complete"></span>
             <div class="collapse" id="collapseExample">
-              <div class="well">
-                <%= job.name %>
-                <%= job.address %> 
-                <%= job.phone %>
-                <%= job.order_time %>
-                <%= job.order_contents %>
-                <%= job.delivery_fee %>
-                <%= job.delivery_tip %>
-                <%= job.riders %>
+              <div class="well text-center">
+                <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
+                <%= job.order_contents %><br>
+                CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
+                <%= job.date %>
               </div>
             </div>
           </li>
@@ -72,31 +63,27 @@
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === true) { %>
-          <li class="job list-group-item" data-id="<%= job._id %>">
-             <span data-id="<%= job._id %>" class="btn btn-default glyphicon glyphicon-minus returnToMyJobs"></span>
-             <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
-               <%= job.address %> ,<%= job.date %>
-             </a>
-             <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-plus complete"></span>
-             <div class="collapse" id="collapseExample">
-               <div class="well">
-                 <%= job.name %>
-                 <%= job.address %> 
-                 <%= job.phone %>
-                 <%= job.order_time %>
-                 <%= job.order_contents %>
-                 <%= job.delivery_fee %>
-                 <%= job.delivery_tip %>
-                 <%= job.riders %>
-               </div>
-             </div>
-           </li>
-           <% incrementer++ %>
-           <% }}) %>
-        </ul>
-      </div> 
-    </div>
+          <li class="job list-group-item text-center" data-id="<%= job._id %>">
+           <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-minus returnToMyJobs"></span>
+           <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="ticket<%= incrementer %>" href="<%= job._id %>">
+             <%= job.address %>, <%= job.phone %>
+           </a>
+           <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-plus complete"></span>
+           <div class="collapse" id="collapseExample">
+             <div class="well text-center">
+              <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
+              <%= job.order_contents %><br>
+              CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
+              <%= job.date %>
+            </div>
+          </div>
+        </li>
+        <% incrementer++ %>
+        <% }}) %>
+      </ul>
+    </div> 
   </div>
+</div>
 </body>
 
 

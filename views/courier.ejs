@@ -3,15 +3,16 @@
 <body class="blackGround">
   <div id="page-wrapper" class="container col-xs-6 col-xs-offset-3">
     <header class="page-header text-center">
-      <h1>Courier</h1>
+      <h1>COURIER</h1>
     </header> 
-    <div id="jobs-list">
+    <div class="text-centerc" id="jobs-list">
       <div>
         <h2>queue</h2>
         <ul class="jobs list-group">
         <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
-          <% if (!job.rider && job.completed === false) { %>
+          <!-- SET CONDITION BELOW FOR COOKIES -->
+          <% if (!job.rider && userid && job.completed === false) { %>
           <li class="job list-group-item" data-id="<%= job._id %>">
             <span data-id="<%= job._id %>" class="btn btn-default remove glyphicon glyphicon-minus"></span>
             <a id="ticket<%= incrementer %>" href="/fulljob/<%= job._id %>">

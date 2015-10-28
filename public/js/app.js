@@ -1,18 +1,18 @@
-//HIDE THE COURIER AND DISPATCH LINES WHEN YOU HIT SPLASH PAGE
-//SHOW THE PAGES WHEN A USER LOGS IN
-//WATCH BRAUS EXPRESS VIDEO 16 FOR STEP BY STEP INSTRUCTION
-//YOU ARE GOING TO TARGET APP.JS AND COURIER.JS AND THE NAVBAR
+//IM TRYING TO FIGURE OUT HOW TO MAKE IT SO THAT ONLY LOGGED IN USERS CAN SEE DISPATCH AND COURIER LINKS AND CANT SEE SIGNIN SIGN UP
 $(document).ready(function(){
+
+	$('.not-logged-in').hide();
 
 	function checkAuth() {
 		$.get('/currentrider', function (data) {
 			if (data.rider || data.cookie) {
 				console.log("worked");
-				//this needs work
-				// $('#nav-signin').hide();
-				// $('#nav-signup').hide();
+				$('#dropdown-test').children('.logged-in').hide();
+				$('.not-logged-in').show();
 			}else {
 				console.log("didnt worked");
+				$('#dropdown-test').children('.logged-in').show();
+				$('.not-logged-in').hide();
 			}
 		});
 	}
@@ -29,6 +29,7 @@ $('#signUp').on('submit', function (e) {
 	})
 	.done(function(data) {
 		console.log("successfully created a new rider", data);
+		$('.not-logged-in').hide();
 		window.location.href = '/courier';
 	})
 	.fail(function(data) {
@@ -47,9 +48,8 @@ $('#signIn').on('submit', function (e) {
 
 	.success(function(data) {
 		console.log('logged in', data);
-		//these are links to the links on the nav bar.  I want to be able to hide them when a user is signed in.
-		// $('#nav-signin').hide();
-		// $('#nav-signup').hide();
+		$('.not-logged-in').hide();
+		
 		window.location.href = '/courier';
 
 	})
@@ -66,7 +66,7 @@ $('#logOut').click(function(e) {
 
 	$.get('/logout', function(data) {
 		console.log(data.msg);
-		window.location.href = '/signin';
+		window.location.href = '/';
 	});
 });
 

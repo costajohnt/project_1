@@ -16,15 +16,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navWhite">
       <ul class="nav navbar-nav">
-        <li class="active" id="nav-courier"><a href="/courier" >COURIER<span class="sr-only">(current)</span></a></li>
-        <li id="nav-dispatch"><a href="/dispatch" id="nav-dispatch">DISPATCH</a></li>
+        <li class="active not-logged-in"><a href="/courier" >COURIER<span class="sr-only">(current)</span></a></li>
+        <li class="not-logged-in"><a href="/dispatch" id="nav-dispatch">DISPATCH</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Riders<span class="caret"></span></a>
           <ul class="dropdown-menu" id='dropdown-test'>
-            <li id='nav-signup'><a href="/signup">sign up</a></li>
-            <li id='nav-signin'><a href="/signin">sign in</a></li>
+            <li class='logged-in'><a href="/signup">sign up</a></li>
+            <li class='logged-in'><a href="/signin">sign in</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#" id="logOut">log out</a></li>
           </ul>

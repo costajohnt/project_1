@@ -72,7 +72,7 @@ app.post('/api/riders', function (req, res) {
 
 //SETTING SESSION COOKIE???
 app.get('/currentrider', function (req, res) {
-  res.json({ rider: req.session.rider, cookie: req.cookies.riderId });
+  res.json({ rider: req.session.riderId, cookie: req.cookies.riderId });
 });
 
 //SIGN IN RIDER
@@ -91,22 +91,22 @@ app.post('/api/signin', function (req, res) {
   });
 });
 
-// AUTHENTICATE RIDER
-app.post('/sessions', function (req, res) {
-  //CALL AUTHENTICATE FUNCTION TO CHECK IF PASSWORD RIDER ENTERED IS CORRECT
-  var rider = req.body;
-  db.Rider.authenticate(rider.name, rider.password, function (err, loggedInRider) {
-    if (err){
-      console.log('authentication error: ', err);
-      res.status(500).send();
-    } else {
-      console.log('setting session rider id ', loggedInRider._id);
-      req.session.riderId = loggedInRider._id;
-      res.cookie('riderId', rider._id);
-      res.redirect('/profile');
-    }
-  });
-});
+// // AUTHENTICATE RIDER
+// app.post('/sessions', function (req, res) {
+//   //CALL AUTHENTICATE FUNCTION TO CHECK IF PASSWORD RIDER ENTERED IS CORRECT
+//   var rider = req.body;
+//   db.Rider.authenticate(rider.name, rider.password, function (err, loggedInRider) {
+//     if (err){
+//       console.log('authentication error: ', err);
+//       res.status(500).send();
+//     } else {
+//       console.log('setting session rider id ', loggedInRider._id);
+//       req.session.riderId = loggedInRider._id;
+//       res.cookie('riderId', rider._id);
+//       res.redirect('/profile');
+//     }
+//   });
+// });
 
 //
 

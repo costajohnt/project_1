@@ -7,43 +7,32 @@ $(document).ready(function(){
 				center: {lat: -34.397, lng: 150.644},
 				zoom: 8
 			});
-			  var geocoder = new google.maps.Geocoder();
-
-			  // document.getElementById('#queue').addEventListener('click', function() {
-			  //   geocodeAddress(geocoder, map);
-			  // });
+			
+			var geocoder = new google.maps.Geocoder();
 			var jobs = data;
+			
 			for (var i=0; i<jobs.length; i++) {
 				function geocodeAddress(geocoder, resultsMap) {
-				  var address = jobs[i].address;
-				  geocoder.geocode({'address': address}, function(results, status) {
-				    if (status === google.maps.GeocoderStatus.OK) {
-				      resultsMap.setCenter(results[0].geometry.location);
-				      var marker = new google.maps.Marker({
-				        map: resultsMap,
-				        position: results[0].geometry.location
-				      });
-				    } else {
-				      alert('Geocode was not successful for the following reason: ' + status);
-				    }
-				  });
+					var address = jobs[i].address;
+					geocoder.geocode({'address': address}, function(results, status) {
+						if (status === google.maps.GeocoderStatus.OK) {
+							resultsMap.setCenter(results[0].geometry.location);
+							var marker = new google.maps.Marker({
+								map: resultsMap,
+								position: results[0].geometry.location
+							});
+						} else {
+							alert('Geocode was not successful for the following reason: ' + status);
+						}
+					});
 				}
 				geocodeAddress(geocoder, map);
-
 			}
-			
-			
 		}
-
-		// $('#map-data').html(data[0].address);
-initMap();
+		initMap();
 	});
-
-
-
-// KEEP FUNCTION OUTSIDE OF GET REQUEST
-	
-
-
 });
-
+// $('#map-data').html(data[0].address);
+	  // document.getElementById('#queue').addEventListener('click', function() {
+			  //   geocodeAddress(geocoder, map);
+			  // });

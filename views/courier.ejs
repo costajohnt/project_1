@@ -12,7 +12,7 @@
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <!-- SET CONDITION BELOW FOR COOKIES -->
-          <% if (!job.rider && job.completed === false) { %>
+          <% if ((!job.rider && job.completed === false) && job.available === true) { %>
           <li class="job list-group-item text-center" data-id="<%= job._id %>">
             <span data-id="<%= job._id %>" class="btn btn-primary remove glyphicon glyphicon-minus"></span>
             <a class="btn btn-danger" role="button" data-toggle="collapse" href="#<%= job._id %>" aria-expanded="false" aria-controls="<%= job._id %>" id="ticket<%= incrementer %>" href="<%= job._id %>">
@@ -22,7 +22,7 @@
             <div class="collapse" id="<%= job._id %>">
               <div class="well text-center">
                 <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
-                <%= job.order_contents %><br>
+                <%= job.order_contents %>, <%= job.order_total %><br>
                 CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
                 <%= job.date %>
               </div>
@@ -33,10 +33,10 @@
         </ul>
       </div>
       <div>
-        <h2><button class="btn btn-lg btn-primary">my jobs</button></h2>  <ul class="myjobs list-group">
+        <h2><a href='/maps' class="btn btn-lg btn-primary">my jobs</a></h2>  <ul class="myjobs list-group">
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
-          <% if (job.rider == userid && job.completed === false) { %>
+          <% if ((job.rider == userid && job.completed === false) && job.available === false) { %>
           <li class="job list-group-item text-center" data-id="<%= job._id %>">
             <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-minus returnToQueue"></span>
             <a class="btn btn-danger" role="button" data-toggle="collapse" href="#<%= job._id %>" aria-expanded="false" aria-controls="<%= job._id %>" id="ticket<%= incrementer %>" href="<%= job._id %>">
@@ -46,7 +46,7 @@
             <div class="collapse" id="<%= job._id %>">
               <div class="well text-center">
                 <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
-                <%= job.order_contents %><br>
+                <%= job.order_contents %>, <%= job.order_total %><br>
                 CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
                 <%= job.date %>
               </div>
@@ -57,11 +57,11 @@
         </ul>
       </div> 
       <div>
-        <h2><button class="btn btn-lg btn-primary">my completed jobs</button></h2>
+        <h2><a href='/maps' class="btn btn-lg btn-primary">my completed jobs</a></h2>
         <ul class='mycompletedjobs list-group'>
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
-          <% if (job.rider == userid && job.completed === true) { %>
+          <% if ((job.rider == userid && job.completed === true) && job.available === false){ %>
           <li class="job list-group-item text-center" data-id="<%= job._id %>">
            <span data-id="<%= job._id %>" class="btn btn-primary glyphicon glyphicon-minus returnToMyJobs"></span>
            <a class="btn btn-danger" role="button" data-toggle="collapse" href="#<%= job._id %>" aria-expanded="false" aria-controls="<%= job._id %>" id="ticket<%= incrementer %>" href="<%= job._id %>">
@@ -71,7 +71,7 @@
            <div class="collapse" id="<%= job._id %>">
              <div class="well text-center">
               <%= job.name %>, <%= job.address %>, <%= job.phone %><br>
-              <%= job.order_contents %><br>
+              <%= job.order_contents %>, <%= job.order_total %><br>
               CASH: <%= job.cash_payment %>, DELIVERY FEE: <%= job.delivery_fee %>, TIP: <%= job.delivery_tip %><br>
               <%= job.date %>
             </div>

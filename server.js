@@ -129,12 +129,12 @@ app.delete('/api/jobs/:id', function (req, res) {
   });
 });
 
-//UPDATE A JOB TO ADD A RIDER 
+//UPDATE A JOB TO ADD A RIDER AND MARK AS UNAVAILABLE 
 app.put('/api/jobs/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
     // console.log(job);
     job.rider = req.session.riderId;
-
+    job.available = false;
     console.log('job with rider', job);
     job.save();
     res.json(job);  
@@ -145,6 +145,7 @@ app.put('/api/jobs/:id', function (req, res) {
 app.put('/api/jobs/rider/:id', function (req, res) {
   db.Job.findById(req.params.id, function(err, job) {
     job.rider = undefined;
+    job.available = true;
     job.save();
     console.log('job moved to queue', job);
     res.json(job); 

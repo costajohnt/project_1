@@ -16,10 +16,14 @@ var JobSchema = mongoose.Schema({
 		required: true
 	},
 	
-	order_contents: [{
+	order_contents: {
 		type: String,
-		 required: true
-	}],
+		required: true
+	},
+	order_total: {
+		type: String,
+		required: true
+	},
 	delivery_fee: {
 		type: String, 
 		required: true
@@ -36,6 +40,10 @@ var JobSchema = mongoose.Schema({
 	date: { 
 		type: Date, 
 		default: Date.now
+	},
+	available: {
+		type: Boolean,
+		default: true
 	},
 	completed: {
 		type: Boolean,

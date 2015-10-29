@@ -91,6 +91,16 @@ app.post('/api/signin', function (req, res) {
   });
 });
 
+app.get('/maps', function (req, res) {
+  res.render('maps');
+});
+
+app.get('/api/mapsjobs', function (req, res) {
+  db.Job.find({}, function (err, jobs) {
+    res.json(jobs);
+  });
+});
+
 //LOGOUT RIDER AND TERMINATE SESSION
 app.get('/logout', function (req, res) {
 	req.session.riderId = null;

@@ -7,7 +7,7 @@
     </header> 
     <div class="text-centerc" id="jobs-list">
       <div>
-        <h2><a href="#">queue</a></h2>
+        <h2><a href='/maps' class="btn btn-lg btn-primary">queue</a></h2>
         <ul class="jobs list-group">
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
@@ -33,8 +33,7 @@
         </ul>
       </div>
       <div>
-        <h2><a href="#">my jobs</a></h2>  
-        <ul class="myjobs list-group">
+        <h2><button class="btn btn-lg btn-primary">my jobs</button></h2>  <ul class="myjobs list-group">
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>
           <% if (job.rider == userid && job.completed === false) { %>
@@ -58,7 +57,7 @@
         </ul>
       </div> 
       <div>
-        <h2><a href="#">completed jobs</a></h2>
+        <h2><button class="btn btn-lg btn-primary">my completed jobs</button></h2>
         <ul class='mycompletedjobs list-group'>
           <% var incrementer = 0; %>
           <% jobs.forEach(function(job) { %>

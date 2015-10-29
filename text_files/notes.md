@@ -1,3 +1,16 @@
+10/28 GOOGLE EXTERNAL API SUBPROJECT USING GEOLOCATION AND PLACES SEARCH BOX
+	-first, i need to be able to grab all the data that i need.  To display a map of the jobs in the queue, i need to target jobs without a rider attribute, and whos complete attribute is false.  Next, I need to specifically target the addresses of those jobs (jobs.address).  I may need to figure out a way to set San Francisco, CA as the default in the search box, and add the street address to that before searching.
+	-next, I need to setup a .ejs page to render the map on, and I need a server route to send me there when I click on the href header for queue
+
+Project_1 Geolocation Key
+AIzaSyCZkmUPKJFxjNX-WphevXR8N7zNwjgxNPg
+
+
+
+
+
+
+
 10/26
 
 Ok so lets just have this be like a running stream of conscienceness with everything about the project that is going on in your head right now and then we can look at all of that data and try to organize it on trello and in pseudocode.
@@ -40,3 +53,9 @@ Iahve an id associated with a line.  When Iclick on that line I want it to grab 
 
 
 HERE IS WHAT I WANT, WHEN YOU CLICK ON THE LINK OF A JOB, IT SENDS YOU TO A PAGE WITH ALL OF THE JOB DATA DISPLAYED, PLUS ITS MARKER ON A MAP.  MAKE IT HAPPEN
+
+margin auto will set the contents of a div to the center
+
+
+
+

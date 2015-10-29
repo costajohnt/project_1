@@ -1,4 +1,3 @@
-//IM TRYING TO FIGURE OUT HOW TO MAKE IT SO THAT ONLY LOGGED IN USERS CAN SEE DISPATCH AND COURIER LINKS AND CANT SEE SIGNIN SIGN UP
 $(document).ready(function(){
 
 	$('.not-logged-in').hide();
@@ -18,10 +17,11 @@ $(document).ready(function(){
 	}
 
 	checkAuth();
-
+$('.mycompletedjobs .complete').hide();
 $('#signIn').validate();
 $('#rider-name-sign-up').focus();
 $('#rider-name-sign-in').focus();
+
 //CREATE A NEW RIDER 
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
@@ -177,6 +177,7 @@ $('#jobs-list').on('click', '.complete', function (e) {
 //MOVE A JOB FROM MYCOMPLETEDJOBS BACK TO MYJOBS
 $('#jobs-list').on('click', '.returnToMyJobs', function (e) {
 	e.preventDefault();
+
 	var job = $(this).parents('li');
 
 	$.ajax({
@@ -185,6 +186,7 @@ $('#jobs-list').on('click', '.returnToMyJobs', function (e) {
 		data: job
 	})
 	.done(function(data) {
+
 		console.log("job sent back to my jobs, complete changed to false", data);
 		$(job).find('.returnToMyJobs').removeClass('returnToMyJobs').addClass('returnToQueue');
 		$(job).find('.complete').show();

@@ -41,6 +41,7 @@ $('#signUp').on('submit', function (e) {
 });
 
 	checkAuth();
+
 //RIDER SIGN IN
 $('#signIn').on('submit', function (e) {
 	e.preventDefault();

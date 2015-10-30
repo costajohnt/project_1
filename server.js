@@ -173,13 +173,13 @@ app.put('/api/jobs/incomplete/:id', function (req, res) {
 });
 
 //CLICKING ON THE JOB HREF SENDS THE USER TO A PAGE DISPLAYING ALL THE JOB DATA !!!!WORK ON THIS!!!!
-app.get('/fulljob/:id', function (req, res) {
-  console.log("hitting show route", req.params.id);
-  db.Job.findById(req.params.id, function (err, job) {
-    if (err) console.log(err);
-    res.render('fulljob', { job: job });
-  });
-});
+// app.get('/fulljob/:id', function (req, res) {
+//   console.log("hitting show route", req.params.id);
+//   db.Job.findById(req.params.id, function (err, job) {
+//     if (err) console.log(err);
+//     res.render('fulljob', { job: job });
+//   });
+// });
 
 
 // //FIND A JOB BY ITS ID !!!!NOT WORKING!!!!!

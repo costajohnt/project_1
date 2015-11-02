@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 	checkAuth();
 $('.mycompletedjobs .complete').hide();
+$('#signUp').validate();
 $('#signIn').validate();
 $('#rider-name-sign-up').focus();
 $('#rider-name-sign-in').focus();
@@ -26,18 +27,23 @@ $('#rider-name-sign-in').focus();
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
-	
-	$.post('/api/riders', rider, function (data) {
 
-	})
-	.done(function(data) {
-		console.log("successfully created a new rider", data);
-		$('.not-logged-in').hide();
-		window.location.href = '/courier';
-	})
-	.fail(function(data) {
-		console.log("failed to create new rider");
-	});
+	if ($('#confirmPassWord').val() === $('#passWord').val()) {
+	
+		$.post('/api/riders', rider, function (data) {
+
+		})
+		.done(function(data) {
+			console.log("successfully created a new rider", data);
+			$('.not-logged-in').hide();
+			window.location.href = '/courier';
+		})
+		.fail(function(data) {
+			console.log("failed to create new rider");
+		});
+	}else {
+	
+	}
 });
 
 	checkAuth();
@@ -60,7 +66,6 @@ $('#signIn').on('submit', function (e) {
 	})
 	.error(function(data) {
 		console.log(data.responseText);
-		alert("sign in failed, wrong username or password");
 	});
 });
 

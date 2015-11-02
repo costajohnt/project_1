@@ -1,6 +1,9 @@
 DESCRIPTION:  
 Dispatchers suck.  They are not out in the mean streets.  They dont know the challenges courier's face each day, and they don't know the city nearly as well.  So why do dispatchers control how couriers will be routed?  This application puts the responsibility for routing back in the hands of couriers.  Instead of incoming jobs getting grouped and sorted by dispatchers, jobs are sent to a queue that all couriers have access to.  Couriers can pick up the jobs that they want and be able to choose their own routes.  They also have access to a central job management system, where they can see not only what jobs are available, but what jobs they are currently working on, and the ones they have already completed.  #messlife is a useful tool that empowers couriers and removes the need for dispatchers.
 
+TRELLO:
+https://trello.com/b/APTj7WKG/project-1
+
 WIREFRAMES:
 ![alt tag](http://imgur.com/a19LHqc}
 ![alt tag](http://imgur.com/0dbjOVk}

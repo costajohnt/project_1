@@ -94,8 +94,11 @@ $('#newJob').on('submit', function (e) {
 });
 
 //DELETE A JOB FROM THE QUEUE AND DATABASE
+
+
 $('#jobs-list').on('click', '.remove', function (e) {
 	e.preventDefault();
+if (confirm("are you sure you want to delete this job?")) {
 	var job = $(this).parents('li');
 	var jobId = job.attr('data-id');
 
@@ -109,6 +112,10 @@ $('#jobs-list').on('click', '.remove', function (e) {
 	.fail(function(data) {
 		console.log("failed to delete job");
 	});
+
+}else {
+}
+
 });
 
 //MOVE A JOB FROM THE QUEUE TO MYJOBS

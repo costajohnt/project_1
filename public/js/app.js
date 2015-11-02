@@ -27,9 +27,13 @@ $('#rider-name-sign-in').focus();
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
+<<<<<<< HEAD
 
 	if ($('#confirmPassWord').val() === $('#passWord').val()) {
 	
+=======
+	if ($('#passWord').val() === $('#confirmPassword').val()) {
+>>>>>>> abc66107a4fdd1478588029d189792bc44eba206
 		$.post('/api/riders', rider, function (data) {
 
 		})
@@ -41,8 +45,12 @@ $('#signUp').on('submit', function (e) {
 		.fail(function(data) {
 			console.log("failed to create new rider");
 		});
+<<<<<<< HEAD
 	}else {
 	
+=======
+	} else {
+>>>>>>> abc66107a4fdd1478588029d189792bc44eba206
 	}
 });
 

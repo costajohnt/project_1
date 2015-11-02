@@ -26,18 +26,20 @@ $('#rider-name-sign-in').focus();
 $('#signUp').on('submit', function (e) {
 	e.preventDefault();
 	var rider = $(this).serialize();
-	
-	$.post('/api/riders', rider, function (data) {
+	if ($('#passWord').val() === $('#confirmPassword').val()) {
+		$.post('/api/riders', rider, function (data) {
 
-	})
-	.done(function(data) {
-		console.log("successfully created a new rider", data);
-		$('.not-logged-in').hide();
-		window.location.href = '/courier';
-	})
-	.fail(function(data) {
-		console.log("failed to create new rider");
-	});
+		})
+		.done(function(data) {
+			console.log("successfully created a new rider", data);
+			$('.not-logged-in').hide();
+			window.location.href = '/courier';
+		})
+		.fail(function(data) {
+			console.log("failed to create new rider");
+		});
+	} else {
+	}
 });
 
 	checkAuth();
